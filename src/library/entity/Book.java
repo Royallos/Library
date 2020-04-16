@@ -1,37 +1,29 @@
 package library.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 public class Book {
-    Long id;
-    List<Author> a;
-    List<Genre> g;
+    int id;
+    String Author;
+    String Genre;
     String ISBN;
-    Date created;
-    Date update;
     String title;
 
-    public Book(Long id, List<Author> a, List<Genre> g, String ISBN, Date created, Date update, String title) {
+    public Book(int id, String Author, String Genre, String ISBN, String title) {
         this.id = id;
-        this.a = a;
-        this.g = g;
+        this.Author = Author;
+        this.Genre = Genre;
         this.ISBN = ISBN;
-        this.created = created;
-        this.update = update;
         this.title = title;
     }
 
     public Book() {
     }
 
-    public Date getUpdate() {
-        return update;
-    }
 
-    public void setUpdate(Date update) {
-        this.update = update;
-    }
 
     public String getTitle() {
         return title;
@@ -41,28 +33,28 @@ public class Book {
         this.title = title;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public List<Author> getA() {
-        return a;
+    public String getAuthor() {
+        return Author;
     }
 
-    public void setA(List<Author> a) {
-        this.a = a;
+    public void setAuthor(String author) {
+        Author = author;
     }
 
-    public List<Genre> getG() {
-        return g;
+    public String getGenre() {
+        return Genre;
     }
 
-    public void setG(List<Genre> g) {
-        this.g = g;
+    public void setGenre(String genre) {
+        Genre = genre;
     }
 
     public String getISBN() {
@@ -73,11 +65,4 @@ public class Book {
         this.ISBN = ISBN;
     }
 
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
 }

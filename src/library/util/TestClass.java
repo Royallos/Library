@@ -1,4 +1,4 @@
 package library.util;
 
-public class TestClass {
+public interface TestClass {
 }
