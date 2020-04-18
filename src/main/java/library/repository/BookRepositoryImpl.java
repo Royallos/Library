@@ -17,9 +17,9 @@ public class BookRepositoryImpl implements BookRepository {
     private final String addGenreQuery = "INSERT INTO genre (name) Values (?)";
     private final String checkAuthor = "Select * from author where name in ('";
     private final String checkGenre = "Select * from genre where name in ('";
-    private final String findAuthorName = "Select * from author where name in ('";
-    private final String findAuthorSurname = "') and surname in ('";
-    private final String findGenreName = "Select * from genre where name in ('";
+    private final String findAuthorName = "Select * from author where name = ('";
+    private final String findAuthorSurname = "') and surname = ('";
+    private final String findGenreName = "Select * from genre where name = ('";
     protected int authorId;
     protected int genreId;
 
@@ -61,12 +61,13 @@ public class BookRepositoryImpl implements BookRepository {
         PreparedStatement prst = connect.prepareStatement(addBookQuery, Statement.RETURN_GENERATED_KEYS);
         prst.setString(1, book.getTitle());
         prst.setString(2, book.getISBN());
-        prst.setInt(3, authorId);
-        prst.setInt(4, genreId);
-        prst.executeUpdate();
         checkAuthor(book);
         checkGenre(book);
         addAuthorGenreId(book);
+        addAuthorGenreId(book);
+        prst.setInt(3, authorId);
+        prst.setInt(4, genreId);
+        prst.executeUpdate();
         return null;
     }
     public void checkAuthor(Book book) throws SQLException {
@@ -123,7 +124,7 @@ public class BookRepositoryImpl implements BookRepository {
 
         Connection conn = DataSourceUtil.getConnection();
         Statement stmt = conn.createStatement();
-        ResultSet rst = stmt.executeQuery(findAuthorName + book.getAuthorName() + findAuthorSurname + book.getAuthorSurname() +"')");
+        ResultSet rst = stmt.executeQuery(findAuthorName + book.getAuthorName() + findAuthorSurname + book.getAuthorSurname() + "')");
 
         while (rst.next()) {
             authorId = rst.getInt("id");
