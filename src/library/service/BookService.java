@@ -10,5 +10,5 @@ public interface BookService {
 
     List<Book> getBooks() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, SQLException;
     Book addBook(Book book) throws SQLException;
-    void deleteBook();
+    void deleteBook() throws SQLException;
 }

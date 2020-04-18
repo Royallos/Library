@@ -27,7 +27,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void deleteBook() {
+    public void deleteBook() throws SQLException {
+        bookRepository.deleteBook();
 
     }
 }

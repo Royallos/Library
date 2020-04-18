@@ -1,19 +1,19 @@
 package library.entity;
 
 public class Genre {
-    Long id;
+    int id;
     String name;
 
-    public Genre(Long id, String name) {
+    public Genre(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

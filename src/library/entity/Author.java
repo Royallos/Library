@@ -1,21 +1,21 @@
 package library.entity;
 
 public class Author {
-    Long id;
+    int id;
     String name;
     String surname;
 
-    public Author(Long id, String name, String surname) {
+    public Author(int id, String name, String surname) {
         this.id = id;
         this.name = name;
         this.surname = surname;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

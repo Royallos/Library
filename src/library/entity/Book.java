@@ -1,29 +1,50 @@
 package library.entity;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 
 public class Book {
     int id;
-    String Author;
-    String Genre;
+    Author author;
+    Genre genre;
     String ISBN;
     String title;
 
-    public Book(int id, String Author, String Genre, String ISBN, String title) {
+    public Book(int id, String ISBN, String title, Author author, Genre genre) {
         this.id = id;
-        this.Author = Author;
-        this.Genre = Genre;
         this.ISBN = ISBN;
         this.title = title;
+        this.author = author;
+        this.genre = genre;
+
     }
 
     public Book() {
     }
 
 
+    public int getGenreId() {
+        return genre.getId();
+    }
+    public String getGenreName() {
+        return genre.getName();
+    }
+
+
+    public int getAuthorId() {
+        return author.getId();
+    }
+    public String getAuthorName() {
+        return author.getName();
+    }
+    public String getAuthorSurname() {
+        return author.getSurname();
+    }
+
+    public void setAuthorId(Author author) {
+        this.author = author;
+    }
+    public void setGenreId(Genre genre) {
+        this.genre = genre;
+    }
 
     public String getTitle() {
         return title;
@@ -39,22 +60,6 @@ public class Book {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getAuthor() {
-        return Author;
-    }
-
-    public void setAuthor(String author) {
-        Author = author;
-    }
-
-    public String getGenre() {
-        return Genre;
-    }
-
-    public void setGenre(String genre) {
-        Genre = genre;
     }
 
     public String getISBN() {
