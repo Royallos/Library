@@ -64,7 +64,6 @@ public class BookRepositoryImpl implements BookRepository {
         checkAuthor(book);
         checkGenre(book);
         addAuthorGenreId(book);
-        addAuthorGenreId(book);
         prst.setInt(3, authorId);
         prst.setInt(4, genreId);
         prst.executeUpdate();
