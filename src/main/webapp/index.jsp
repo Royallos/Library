@@ -6,9 +6,7 @@
 </head>
 <body>
 <h2>Library</h2>
-
 <jsp:include page="header.jsp"/>
 <p>You can use these links to add, edit, or delete</p>>
-
 </body>
 </html>

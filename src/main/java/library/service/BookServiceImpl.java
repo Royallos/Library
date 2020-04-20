@@ -3,7 +3,6 @@ package library.service;
 import library.entity.Book;
 import library.repository.BookRepository;
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,6 +13,7 @@ public class BookServiceImpl implements BookService {
     public BookServiceImpl(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
+
     @Override
     public List<Book> getBooks() throws SQLException {
         List<Book> books = bookRepository.getBooks();

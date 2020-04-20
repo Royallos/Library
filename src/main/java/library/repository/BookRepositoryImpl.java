@@ -1,4 +1,4 @@
-package main.java.library.repository;
+package library.repository;
 
 import library.entity.Book;
 import library.util.DataSourceUtil;
