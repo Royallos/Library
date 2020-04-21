@@ -10,20 +10,13 @@ import java.util.Scanner;
 
 public class BookRepositoryImpl implements BookRepository {
 
-    private final String  getBooksQuery = "Select * from books";
-    private final String addBookQuery = "INSERT INTO books (title, ISBN, author_id, genre_id) values (?, ?, ?, ?)";
+    private final String getBooksQuery = "Select * from books";
+    private final String addBookQuery = "INSERT INTO books (title, ISBN) values (?, ?)";
     private final String delete = "DELETE from books WHERE id = '";
-    private final String addAuthorQuery = "INSERT INTO author (name, surname) Values (?, ?)";
-    private final String addGenreQuery = "INSERT INTO genre (name) Values (?)";
-    private final String checkAuthor = "Select * from author where name in ('";
-    private final String checkGenre = "Select * from genre where name in ('";
-    private final String findAuthorName = "Select * from author where name = ('";
-    private final String findAuthorSurname = "') and surname = ('";
-    private final String findGenreName = "Select * from genre where name = ('";
-    protected int authorId;
-    protected int genreId;
+
 
     @Override
+//    Get list of book
     public List<Book> getBooks() throws SQLException {
 
         Connection connect = DataSourceUtil.getConnection();
@@ -55,90 +48,20 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
+//    Fill the books table
     public Book addBook(Book book) throws SQLException {
 
         Connection connect = DataSourceUtil.getConnection();
-        PreparedStatement prst = connect.prepareStatement(addBookQuery, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement prst = connect.prepareStatement(addBookQuery);
         prst.setString(1, book.getTitle());
         prst.setString(2, book.getISBN());
-        checkAuthor(book);
-        checkGenre(book);
-        addAuthorGenreId(book);
-        prst.setInt(3, authorId);
-        prst.setInt(4, genreId);
         prst.executeUpdate();
+        DataSourceUtil.closeConnection(connect);
         return null;
-    }
-    public void checkAuthor(Book book) throws SQLException {
-        Connection connect = DataSourceUtil.getConnection();
-        PreparedStatement prst1 = connect.prepareStatement(addAuthorQuery);
-        prst1.setString(1,book.getAuthorName());
-        prst1.setString(2,book.getAuthorSurname());
-        if (checkAuthorName(book)) {
-            prst1.executeUpdate();
-        }
-
-    }
-
-    public void checkGenre(Book book) throws SQLException {
-        Connection connect = DataSourceUtil.getConnection();
-        PreparedStatement prst2 = connect.prepareStatement(addGenreQuery);
-        prst2.setString(1, book.getGenreName());
-        if (checkGenreName(book)) {
-            prst2.executeUpdate();
-        }
-    }
-    private boolean checkAuthorName(Book book) throws SQLException {
-
-        boolean res = true;
-        Connection connect = DataSourceUtil.getConnection();
-        Statement st = connect.createStatement();
-        ResultSet rs = st.executeQuery(checkAuthor + book.getAuthorName() + "')");
-
-        while (rs.next()) {
-            if (rs.getString("name").equals(book.getAuthorName()) && rs.getString("surname").equals(book.getAuthorSurname())) {
-
-                res = false;
-            }
-        }
-        return res;
-    }
-    private boolean checkGenreName(Book book) throws SQLException {
-
-        boolean res = true;
-        Connection connect = DataSourceUtil.getConnection();
-        Statement st = connect.createStatement();
-        ResultSet rs = st.executeQuery(checkGenre + book.getGenreName() + "')");
-
-        while (rs.next()) {
-            if (rs.getString("name").equals(book.getGenreName())) {
-
-                res = false;
-            }
-        }
-        return res;
-    }
-
-    private void addAuthorGenreId(Book book) throws SQLException {
-
-        Connection conn = DataSourceUtil.getConnection();
-        Statement stmt = conn.createStatement();
-        ResultSet rst = stmt.executeQuery(findAuthorName + book.getAuthorName() + findAuthorSurname + book.getAuthorSurname() + "')");
-
-        while (rst.next()) {
-            authorId = rst.getInt("id");
-        }
-
-        Statement stmt1 = conn.createStatement();
-        ResultSet rst1 = stmt1.executeQuery(findGenreName + book.getGenreName() + "')");
-
-        while (rst1.next()) {
-            genreId = rst1.getInt("id");
-        }
-
     }
 
     @Override
+//    Delete book from books table
         public void deleteBook () throws SQLException {
 
             Scanner scan = new Scanner(System.in);
@@ -147,5 +70,6 @@ public class BookRepositoryImpl implements BookRepository {
             Connection connect = DataSourceUtil.getConnection();
             Statement st = connect.createStatement();
             st.executeUpdate(delete + id + "'");
+        DataSourceUtil.closeConnection(connect);
         }
 }

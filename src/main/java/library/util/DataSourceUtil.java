@@ -15,7 +15,7 @@ public class DataSourceUtil {
 
     private static final String url="jdbc:mysql://localhost:3306/library?serverTimezone=Europe/Moscow";
     private static final String user="root";
-    private static final String password="Vlad4545QA55";
+    private static final String password="1212";
     public static Connection getConnection() throws SQLException {
 
         try{

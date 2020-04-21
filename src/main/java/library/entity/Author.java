@@ -11,9 +11,6 @@ public class Author {
         this.surname = surname;
     }
 
-    public Author() {
-    }
-
     public int getId() {
         return id;
     }
